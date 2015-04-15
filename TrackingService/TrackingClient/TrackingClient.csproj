@@ -127,9 +127,10 @@
     <Content Include="app\components\version\version.js" />
     <Content Include="app\components\version\version_test.js" />
     <Content Include="app\favicon.ico" />
-    <Content Include="app\index.bak.html" />
     <Content Include="app\index.html" />
+    <Content Include="app\index.1.html" />
     <Content Include="app\not-found.html" />
+    <Content Include="app\shared\layout.html" />
     <Content Include="app\view1\view1.html" />
     <Content Include="app\view1\view1.js" />
     <Content Include="app\view1\view1_test.js" />
@@ -149,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\bower_components\angular-ui-router\angular-ui-router.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
