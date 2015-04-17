@@ -71,6 +71,20 @@
     <Content Include="app\bower_components\angular-route\bower.json" />
     <Content Include="app\bower_components\angular-route\package.json" />
     <Content Include="app\bower_components\angular-route\README.md" />
+    <Content Include="app\bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
+    <Content Include="app\bower_components\angular-ui-router\release\angular-ui-router.js" />
+    <Content Include="app\bower_components\angular-ui-router\release\angular-ui-router.min.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\common.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\resolve.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\state.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\stateDirectives.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\stateFilters.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\templateFactory.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\urlMatcherFactory.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\urlRouter.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\view.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\viewDirective.js" />
+    <Content Include="app\bower_components\angular-ui-router\src\viewScroll.js" />
     <Content Include="app\bower_components\angular\.bower.json" />
     <Content Include="app\bower_components\angular\angular.min.js.gzip" />
     <Content Include="app\bower_components\angular\angular.min.js.map" />
@@ -152,7 +166,12 @@
     <Content Include="package.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\bower_components\angular-ui-router\angular-ui-router.js" />
+    <Content Include="app\bower_components\angular-ui-router\.bower.json" />
+    <Content Include="app\bower_components\angular-ui-router\bower.json" />
+    <Content Include="app\bower_components\angular-ui-router\CHANGELOG.md" />
+    <Content Include="app\bower_components\angular-ui-router\CONTRIBUTING.md" />
+    <Content Include="app\bower_components\angular-ui-router\LICENSE" />
+    <Content Include="app\bower_components\angular-ui-router\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
