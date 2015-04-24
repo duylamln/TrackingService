@@ -145,12 +145,9 @@
     <Content Include="app\index.1.html" />
     <Content Include="app\not-found.html" />
     <Content Include="app\shared\layout.html" />
-    <Content Include="app\view1\view1.html" />
-    <Content Include="app\view1\view1.js" />
-    <Content Include="app\view1\view1_test.js" />
-    <Content Include="app\view2\view2.html" />
-    <Content Include="app\view2\view2.js" />
-    <Content Include="app\view2\view2_test.js" />
+    <Content Include="app\tracker\tracker.html" />
+    <Content Include="app\tracker\tracker.js" />
+    <Content Include="app\tracker\tracker_test.js" />
     <Content Include="e2e-tests\protractor.conf.js" />
     <Content Include="e2e-tests\scenarios.js" />
     <Content Include="server.js" />

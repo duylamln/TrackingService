@@ -1,0 +1,15 @@
+<div layout="row">
+    <div flex>
+        <md-toolbar class="md-warn">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex" ng-bind="trackerCtr.monday | date"></h2>&nbsp;&nbsp;-&nbsp;&nbsp;
+                <h2 class="md-flex" ng-bind="trackerCtr.friday | date"></h2>
+            </div>
+        </md-toolbar>
+        <md-content layout-padding>
+            <pre>{{trackerCtr.trackers | json}}</pre>
+        </md-content>
+    </div>
+
+
+</div>

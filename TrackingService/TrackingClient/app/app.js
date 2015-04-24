@@ -4,10 +4,10 @@
 angular.module('myApp', [
   'ui.router',
   'myApp.version',
-  'myApp.view1'
+  'myApp.tracker'
 ]).
 config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/notfound");
+    $urlRouterProvider.otherwise("/home");
 
     $stateProvider
         .state('home', { url: '/home', templateUrl: 'shared/layout.html' })
