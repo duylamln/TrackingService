@@ -91,6 +91,14 @@
     <Content Include="app\bower_components\angular\bower.json" />
     <Content Include="app\bower_components\angular\package.json" />
     <Content Include="app\bower_components\angular\README.md" />
+    <Content Include="app\bower_components\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="app\bower_components\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="app\bower_components\bootstrap\css\bootstrap.css" />
+    <Content Include="app\bower_components\bootstrap\css\bootstrap.min.css" />
+    <Content Include="app\bower_components\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="app\bower_components\bootstrap\js\bootstrap.js" />
+    <Content Include="app\bower_components\bootstrap\js\bootstrap.min.js" />
+    <Content Include="app\bower_components\bootstrap\js\npm.js" />
     <Content Include="app\bower_components\html5-boilerplate\.bower.json" />
     <Content Include="app\bower_components\html5-boilerplate\.htaccess" />
     <Content Include="app\bower_components\html5-boilerplate\CHANGELOG.md" />
@@ -134,6 +142,7 @@
     <Content Include="app\bower_components\html5-boilerplate\js\vendor\jquery-1.10.2.min.js" />
     <Content Include="app\bower_components\html5-boilerplate\js\vendor\modernizr-2.6.2.min.js" />
     <Content Include="app\bower_components\html5-boilerplate\robots.txt" />
+    <Content Include="app\bower_components\jquery\jquery-1.11.2.min.js" />
     <Content Include="app\components\version\interpolate-filter.js" />
     <Content Include="app\components\version\interpolate-filter_test.js" />
     <Content Include="app\components\version\version-directive.js" />
@@ -145,6 +154,8 @@
     <Content Include="app\index.1.html" />
     <Content Include="app\not-found.html" />
     <Content Include="app\shared\layout.html" />
+    <Content Include="app\shared\container.html" />
+    <Content Include="app\shared\menu.html" />
     <Content Include="app\tracker\tracker.html" />
     <Content Include="app\tracker\tracker.js" />
     <Content Include="app\tracker\tracker_test.js" />
@@ -169,6 +180,14 @@
     <Content Include="app\bower_components\angular-ui-router\CONTRIBUTING.md" />
     <Content Include="app\bower_components\angular-ui-router\LICENSE" />
     <Content Include="app\bower_components\angular-ui-router\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\bower_components\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="app\bower_components\bootstrap\css\bootstrap.css.map" />
+    <Content Include="app\bower_components\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="app\bower_components\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="app\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="app\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
