@@ -12,7 +12,7 @@ angular.module('myApp.tracker', ['ui.router'])
             controllerAs: 'trackerCtrl'
         })
     .state('master.tracker.detail', {
-        url: '/'
+
 
     })
 }])
