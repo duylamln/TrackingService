@@ -5,7 +5,8 @@ angular.module('myApp', [
   'ui.router',
   'myApp.version',
   'myApp.tracker',
-  'ngAnimate'
+  'ngAnimate',
+  'cgBusy'
 ])
     .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
@@ -31,4 +32,12 @@ angular.module('myApp', [
     workingHourPerDay: 8,
     workingHourPerWeek: 40,
     lunchHour: 1
-});
+})
+.value('cgBusyDefaults', {
+    message: 'Loading ...',
+    backdrop: true,
+    templateUrl: 'shared/cg-busy-custom-template.html',
+    delay: 300,
+    minDuration: 700,
+    wrapperClass: 'my-class my-class2'
+});;
