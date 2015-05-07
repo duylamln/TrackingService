@@ -2,13 +2,24 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <span class="h4" ng-bind="trackerCtrl.monday | date"></span>
-                <span class="glyphicon glyphicon-arrow-right"></span>
-                <span class="h4" ng-bind="trackerCtrl.friday | date"></span>
+                <div class="row">
+                    <div class="col-lg-3 ">
+                        <a href="javascript:void(0)" ng-click="trackerCtrl.prevWeek()"><span class="glyphicon glyphicon-backward pull-right"></span></a>
+                    </div>
+                    <div class="col-lg-6" style="text-align:center">
+                        <span class="h4" ng-bind="trackerCtrl.monday | date"></span>
+                        <span class="glyphicon glyphicon-arrow-right"></span>
+                        <span class="h4" ng-bind="trackerCtrl.friday | date"></span>
+                    </div>
+                    <div class="col-lg-3 ">
+                        <a href="javascript:void(0)" ng-click="trackerCtrl.nextWeek()"><span class="glyphicon glyphicon-forward pull-left"></span></a>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="panel-body">
-                <table class="table">
+            <div class="panel-body" cg-busy="trackerCtrl.promise">
+                <table class="table tracker">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -28,12 +39,15 @@
                 </table>
                 <div class="progress">
                     <div class="progress-bar" ng-style="{width: trackerCtrl.weekHoursInPercent + '%'}">{{trackerCtrl.weekHoursInFormat}}</div>
-
                     <div class="progress-bar progress-bar-danger" ng-style="{width: trackerCtrl.lackOfHoursInPercent + '%'}">{{trackerCtrl.lackOfHoursInFormat}}</div>
                 </div>
             </div>
-            
+
         </div>
+    </div>
+    <div class="col-lg-6" ui-view="detail">
+
+
     </div>
 </div>
 

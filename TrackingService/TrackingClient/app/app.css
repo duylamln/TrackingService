@@ -28,3 +28,16 @@
   content: "";
   padding: 0;
 }
+
+/*tracker table*/
+.tracker > thead > tr > th {
+    width: 25%;
+}
+
+.tracker > thead > tr > th:not(:first-child) {
+    text-align: center;
+}
+
+.tracker > tbody > tr > td:not(:first-child) {
+    text-align: center;
+}
