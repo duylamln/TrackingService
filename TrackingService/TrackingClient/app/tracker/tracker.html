@@ -29,7 +29,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="tracker in trackerCtrl.trackers" ng-class="{danger: tracker.duration == undefined, 'warning': tracker.duration < trackerCtrl.appSettings.workingHourPerDay,'success': tracker.duration >= trackerCtrl.appSettings.workingHourPerDay}">
+                        <tr ng-repeat="tracker in trackerCtrl.trackers"
+                            ng-class="{danger: tracker.duration == undefined, 'warning': tracker.duration < trackerCtrl.appSettings.workingHourPerDay,'success': tracker.duration >= trackerCtrl.appSettings.workingHourPerDay}"
+                            ng-click="trackerCtrl.gotoDetail(tracker)">
                             <td ng-bind="tracker.shortDate | date:'EEEE'"></td>
                             <td ng-bind="tracker.checkin | date:'HH:mm':'UTC'"></td>
                             <td ng-bind="tracker.checkout | date:'HH:mm':'UTC'"></td>
@@ -45,7 +47,7 @@
 
         </div>
     </div>
-    <div class="col-lg-6" ui-view="detail">
+    <div class="col-lg-6" ui-view>
 
 
     </div>

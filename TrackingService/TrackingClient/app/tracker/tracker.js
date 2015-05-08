@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('myApp.tracker', ['ui.router'])
-
-.config(['$stateProvider', function ($stateProvider) {
+angular.module('myApp.tracker', ['ui.router']).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
         .state('master.tracker',
         {
@@ -11,16 +9,20 @@ angular.module('myApp.tracker', ['ui.router'])
             controller: 'TrackerController',
             controllerAs: 'trackerCtrl'
         })
-    .state('master.tracker.detail', {
+        .state('master.tracker.detail', {
+            url: '/:date',
+            templateUrl: 'tracker/tracker-detail.html',
+            controller: 'TrackerDetailController',
+            controllerAs: 'trackerDetailCtrl'
+        });
+}]);
 
+/*Tracker Controller*/
 
-    })
-}])
+angular.module('myApp.tracker').controller('TrackerController', TrackerController);
 
-.controller('TrackerController', TrackerController);
-
-TrackerController.$inject = ['$scope', '$timeout', 'trackerService', 'appSettings'];
-function TrackerController($scope, $timeout, trackerService, appSettings) {
+TrackerController.$inject = ['$scope', '$timeout', 'TrackerService', 'appSettings'];
+function TrackerController($scope, $timeout, TrackerService, appSettings) {
     var self = this;
     self.toDay = new Date();
 
@@ -28,19 +30,18 @@ function TrackerController($scope, $timeout, trackerService, appSettings) {
     var sessionLogOffStr = "Session Log off";
     var lunchTimeHour = appSettings.lunchHour;
     self.appSettings = appSettings;
-
+    self.gotoDetail = gotoDetail;
     self.trackers = [];
 
     $scope.$watch(function () {
         return self.toDay;
     }, function () {
-        console.log(self.toDay);
         self.monday = getMonday(self.toDay);
         self.friday = new Date(self.monday.getFullYear(), self.monday.getMonth(), self.monday.getDate() + 4, 23, 59, 59);
         if (self.monday === undefined || self.friday === undefined) {
             return;
         }
-        self.promise = trackerService.getTrackerByDate(self.monday, self.friday).then(function (response) {
+        self.promise = TrackerService.getTrackerByDate(self.monday, self.friday).then(function (response) {
             var trackersUnderlaying = [];
             var allShortDate = [];
 
@@ -149,13 +150,30 @@ function TrackerController($scope, $timeout, trackerService, appSettings) {
     function nextWeek() {
         self.toDay.addDates(7);
     }
+
+    function gotoDetail(tracker) {
+        
+        var selectedDate = tracker.shortDate.format("yyyymmdd");
+        $scope.$state.go('master.tracker.detail', { date: selectedDate });
+
+    }
+}
+
+/*Tracker Detail Controller*/
+
+angular.module('myApp.tracker').controller('TrackerDetailController', TrackerDetailController);
+TrackerDetailController.$inject = ['$scope', 'TrackerService', 'appSettings'];
+function TrackerDetailController($scope, TrackerService, appSettings) {
+    var self = this;
+
+
 }
 
 
-angular.module('myApp.tracker').service('trackerService', trackingService);
-
-trackingService.$inject = ["$q", "$timeout"]
-function trackingService($q, $timeout) {
+/*Tracker Service*/
+angular.module('myApp.tracker').service('TrackerService', TrackerService);
+TrackerService.$inject = ["$q", "$timeout"]
+function TrackerService($q, $timeout) {
     this.init = function () {
         Parse.initialize("u4XKvtb4gCU0P7smzWI09ORk2Ytg933Elt4kxa6J", "l0KaCpkeUgCfwudDHaxrqPwem1IVuil0AwoL3Mun");
     }
@@ -195,4 +213,7 @@ function trackingService($q, $timeout) {
         //return deferred.promise;
     }
 
+    this.getTrackerDetailByDate = function (date) {
+        var copyDateFrom = (new Date(date)).setHours(7);
+    }
 }

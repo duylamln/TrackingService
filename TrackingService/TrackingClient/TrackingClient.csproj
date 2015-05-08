@@ -195,6 +195,7 @@
     <Content Include="app\shared\layout.html" />
     <Content Include="app\shared\container.html" />
     <Content Include="app\shared\menu.html" />
+    <Content Include="app\tracker\tracker-detail.html" />
     <Content Include="app\tracker\tracker.html" />
     <Content Include="app\tracker\tracker.js" />
     <Content Include="app\tracker\tracker_test.js" />
