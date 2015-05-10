@@ -1,1 +1,31 @@
-﻿<span>This is a detail + {{$stateParams}}</span>
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="h4" ng-bind="trackerDetailCtrl.selectedDate.format('dddd MMM D, YYYY')"></span>
+    </div>
+    <div class="panel-body" cg-busy="trackerDetailCtrl.promise">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="tracker in trackerDetailCtrl.trackers">
+                    <td ng-bind="tracker.action"></td>
+                    <td ng-bind="tracker.date | date:'HH:mm':'UTC'"></td>
+                    <td>
+
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>
+
+<!--<pre>{{trackerDetailCtrl.trackers | json}}</pre>-->

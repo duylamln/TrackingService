@@ -162,10 +162,19 @@ function TrackerController($scope, $timeout, TrackerService, appSettings) {
 /*Tracker Detail Controller*/
 
 angular.module('myApp.tracker').controller('TrackerDetailController', TrackerDetailController);
-TrackerDetailController.$inject = ['$scope', 'TrackerService', 'appSettings'];
-function TrackerDetailController($scope, TrackerService, appSettings) {
+TrackerDetailController.$inject = ['$scope', '$q', 'TrackerService', 'appSettings', 'TrackerModel'];
+function TrackerDetailController($scope, $q, TrackerService, appSettings, TrackerModel) {
     var self = this;
-
+    self.selectedDate = moment.utc($scope.$stateParams.date, "YYYYMMDD");
+    self.trackers = [];
+    self.promise = $q.defer();
+    TrackerService.getTrackerDetailByDate(self.selectedDate).then(function (response) {
+        angular.forEach(response, function (tracker) {
+            self.trackers.push(new TrackerModel(tracker));
+        });
+        $scope.$apply();
+        self.promise.resolve();
+    });
 
 }
 
@@ -214,6 +223,35 @@ function TrackerService($q, $timeout) {
     }
 
     this.getTrackerDetailByDate = function (date) {
-        var copyDateFrom = (new Date(date)).setHours(7);
+        var copyDateFrom = moment(date);
+        var copyDateTo = moment(date).hours(23).minutes(59).seconds(59);
+
+        var Tracker = Parse.Object.extend("Tracker");
+        var query = new Parse.Query(Tracker);
+        query.greaterThan("Date", new Date(copyDateFrom));
+        query.lessThan("Date", new Date(copyDateTo));
+        query.ascending("Date");
+        return query.find();
+    }
+}
+
+/*Tracker Model*/
+angular.module('myApp.tracker').factory('TrackerModel', TrackerModel);
+function TrackerModel() {
+    return function Tracker(tracker) {
+        if (tracker) {
+            this.action = tracker.get('Action');
+            this.date = tracker.get('Date');
+            this.description = tracker.get('Description');
+            this.name = tracker.get('Name');
+            this.id = tracker.id;
+            this.createdAt = tracker.createdAt;
+            this.updatedAt = tracker.updatedAt;
+        } else {
+            this.action = '';
+            this.date = '';
+            this.description = '';
+            this.name = '';
+        }
     }
 }
