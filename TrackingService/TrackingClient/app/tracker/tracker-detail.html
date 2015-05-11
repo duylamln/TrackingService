@@ -3,28 +3,26 @@
         <span class="h4" ng-bind="trackerDetailCtrl.selectedDate.format('dddd MMM D, YYYY')"></span>
     </div>
     <div class="panel-body" cg-busy="trackerDetailCtrl.promise">
-        <table class="table">
+        <table class="table tracker-detail">
             <thead>
                 <tr>
-                    <th>Action</th>
-                    <th>Time</th>
-                    <th></th>
+                    <th class="tracker-detail-action">Action</th>
+                    <th class="tracker-detail-time">Time</th>
+                    <th class="tracker-detail-button"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="tracker in trackerDetailCtrl.trackers">
                     <td ng-bind="tracker.action"></td>
-                    <td ng-bind="tracker.date | date:'HH:mm':'UTC'"></td>
-                    <td>
-
+                    <td class="tracker-detail-time" ng-bind="tracker.date | date:'HH:mm':'UTC'"></td>
+                    <td class="tracker-detail-button">
+                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                        
                     </td>
                 </tr>
-
             </tbody>
-
         </table>
-
-
     </div>
 </div>
 
