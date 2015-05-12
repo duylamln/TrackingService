@@ -31,7 +31,13 @@ angular.module('myApp', [
 .constant('appSettings', {
     workingHourPerDay: 8,
     workingHourPerWeek: 40,
-    lunchHour: 1
+    lunchHour: 1,
+    actions: [
+        'Tracking Service start !',
+        'Session Log off',
+        'Session Unlock',
+        'Session Lock'
+    ]
 })
 .value('cgBusyDefaults', {
     message: 'Loading ...',

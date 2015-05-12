@@ -443,6 +443,10 @@
     <Content Include="app\bower_components\moment\templates\test-header.js" />
     <Content Include="app\bower_components\parse\parse.js" />
     <Content Include="app\bower_components\parse\parse.min.js" />
+    <Content Include="app\bower_components\toastr\toastr.css" />
+    <Content Include="app\bower_components\toastr\toastr.js" />
+    <Content Include="app\bower_components\toastr\toastr.min.css" />
+    <Content Include="app\bower_components\toastr\toastr.min.js" />
     <Content Include="app\bower_components\underscore\underscore-min.js" />
     <Content Include="app\bower_components\underscore\underscore.js" />
     <Content Include="app\components\version\interpolate-filter.js" />
@@ -618,6 +622,13 @@
   <ItemGroup>
     <Content Include="app\bower_components\angular-bootstrap\.bower.json" />
     <Content Include="app\bower_components\angular-bootstrap\bower.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\bower_components\toastr\.bower.json" />
+    <Content Include="app\bower_components\toastr\bower.json" />
+    <Content Include="app\bower_components\toastr\README.md" />
+    <Content Include="app\bower_components\toastr\toastr.less" />
+    <Content Include="app\bower_components\toastr\toastr.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

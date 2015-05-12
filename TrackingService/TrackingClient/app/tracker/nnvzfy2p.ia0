@@ -167,82 +167,38 @@ function TrackerDetailController($scope, $q, $timeout, TrackerService, appSettin
     var self = this;
     self.selectedDate = moment.utc($scope.$stateParams.date, "YYYYMMDD");
     self.trackers = [];
-
+    self.promise = $q.defer();
+    var backupTracker = null;
+    self.switchEditMode = switchEditMode;
     self.removeTracker = removeTracker;
+    self.saveTracker = saveTracker;
+    self.cancelChangesTracker = cancelChangesTracker;
     self.appSettings = appSettings;
-    self.today = new Date();
-    self.activeTracker = activeTracker;
-    self.selectedTracker = null;
-    self.clearSelection = clearSelection;
-    self.addOrUpdateTracker = addOrUpdateTracker;
-    self.actionChanged = actionChanged;
 
-    var editMode = false;
 
-    initPage();
-    function initPage() {
-        self.promise = $q.defer();
-        getTrackerDetail();
-    }
-
-    function getTrackerDetail() {        
-        TrackerService.getTrackerDetailByDate(self.selectedDate).then(function (response) {
-            $timeout(function () {
-                self.trackers.length = 0;
-                angular.forEach(response, function (tracker) {
-                    self.trackers.push(new TrackerModel(tracker));
-                });
-                self.promise.resolve();
-            });
+    TrackerService.getTrackerDetailByDate(self.selectedDate).then(function (response) {
+        angular.forEach(response, function (tracker) {
+            self.trackers.push(new TrackerModel(tracker));
         });
+        $scope.$apply();
+        self.promise.resolve();
+    });
+
+    function switchEditMode(tracker) {
+        backupTracker = angular.copy(tracker);
+        tracker.isEditing = true;
     }
 
     function removeTracker(tracker) {
-        TrackerService.removeTracker(tracker).then(function (response) {
-            toastr.warning('Delete tracker successfully!');
 
-            getTrackerDetail();
-        });
     }
 
-    function activeTracker(tracker) {
-        angular.forEach(self.trackers, function (item) {
-            delete item.active;
-        });
-        tracker.active = true;
-        editMode = true;
-        self.selectedTracker = angular.copy(tracker);
+    function saveTracker(tracker) {
     }
-    function clearSelection() {
-        angular.forEach(self.trackers, function (item) {
-            delete item.active;
-        });
-        self.selectedTracker = null;
-        editMode = false;
-    }
-    function addOrUpdateTracker() {
-        //add new 
-        self.promise = $q.defer();
-        if (editMode === false) {
-            TrackerService.saveTracker(self.selectedTracker).then(function (response) {
-                toastr.success("Add new tracker successfully!")
-                getTrackerDetail();
-            });
-        }
-            //update tracker
-        else {
-            delete self.selectedTracker.active;
-            TrackerService.saveTracker(self.selectedTracker).then(function (response) {
-                toastr.success("Update tracker successfully!")
-                getTrackerDetail();
-            });
-        }
-    }
-
-    function actionChanged() {
-        if (!self.selectedTracker.date) {
-            self.selectedTracker.date = new Date();
-        }
+    function cancelChangesTracker(tracker) {
+        //self.trackers[self.trackers.indexOf(tracker)] = backupTracker;
+        angular.copy(backupTracker, self.trackers[self.trackers.indexOf(tracker)]);
+        backupTracker = null;
     }
 }
 
@@ -301,23 +257,6 @@ function TrackerService($q, $timeout) {
         query.ascending("Date");
         return query.find();
     }
-
-    this.saveTracker = function (tracker) {
-        var Tracker = Parse.Object.extend('Tracker');
-        var trackerModel = new Tracker();
-        trackerModel.set('objectId', tracker.id);
-        trackerModel.set('Action', tracker.action);
-        trackerModel.set('Date', tracker.date.addHours(7));
-        trackerModel.set('Description', tracker.action);
-        return trackerModel.save();
-    }
-
-    this.removeTracker = function (tracker) {
-        var Tracker = Parse.Object.extend('Tracker');
-        var trackerModel = new Tracker();
-        trackerModel.set('objectId', tracker.id);
-        return trackerModel.destroy();
-    }
 }
 
 /*Tracker Model*/
@@ -326,7 +265,7 @@ function TrackerModel() {
     return function Tracker(tracker) {
         if (tracker) {
             this.action = tracker.get('Action');
-            this.date = new Date(tracker.get('Date')).addHours(-7);
+            this.date = moment.utc(tracker.get('Date'));
             this.description = tracker.get('Description');
             this.name = tracker.get('Name');
             this.id = tracker.id;
