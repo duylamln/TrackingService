@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-lg-5 pull-right">
                     <button type="button" class="btn btn-success" ng-click="trackerDetailCtrl.addOrUpdateTracker()">
-                        <span class="glyphicon" ng-class="{'glyphicon-plus': trackerDetailCtrl.selectedTracker === null, 'glyphicon-ok':trackerDetailCtrl.selectedTracker !== null}"></span> {{trackerDetailCtrl.selectedTracker === null ? 'Add' : 'Update' }}
+                        <span class="glyphicon" ng-class="{'glyphicon-plus': trackerDetailCtrl.editMode === false, 'glyphicon-ok':trackerDetailCtrl.editMode === true}" ></span> {{trackerDetailCtrl.editMode === false ? 'Add' : 'Update' }}
                     </button>
                     <button type="button" class="btn btn-warning" ng-click="trackerDetailCtrl.clearSelection()">
                         <span class="glyphicon glyphicon-remove"></span> Clear Selection
@@ -48,4 +48,3 @@
         </table>
     </div>
 </div>
-<pre>{{trackerDetailCtrl.trackers | json}}</pre>

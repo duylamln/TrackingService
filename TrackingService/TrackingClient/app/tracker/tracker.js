@@ -177,7 +177,7 @@ function TrackerDetailController($scope, $q, $timeout, TrackerService, appSettin
     self.addOrUpdateTracker = addOrUpdateTracker;
     self.actionChanged = actionChanged;
 
-    var editMode = false;
+    self.editMode = false;
 
     initPage();
     function initPage() {
@@ -200,7 +200,6 @@ function TrackerDetailController($scope, $q, $timeout, TrackerService, appSettin
     function removeTracker(tracker) {
         TrackerService.removeTracker(tracker).then(function (response) {
             toastr.warning('Delete tracker successfully!');
-
             getTrackerDetail();
         });
     }
@@ -210,7 +209,7 @@ function TrackerDetailController($scope, $q, $timeout, TrackerService, appSettin
             delete item.active;
         });
         tracker.active = true;
-        editMode = true;
+        self.editMode = true;
         self.selectedTracker = angular.copy(tracker);
     }
     function clearSelection() {
@@ -218,12 +217,16 @@ function TrackerDetailController($scope, $q, $timeout, TrackerService, appSettin
             delete item.active;
         });
         self.selectedTracker = null;
-        editMode = false;
+        self.editMode = false;
     }
     function addOrUpdateTracker() {
         //add new 
         self.promise = $q.defer();
-        if (editMode === false) {
+        if (self.editMode === false) {
+            if (self.selectedTracker === null) {
+                self.promise.resolve();
+                return;
+            }
             TrackerService.saveTracker(self.selectedTracker).then(function (response) {
                 toastr.success("Add new tracker successfully!")
                 getTrackerDetail();
@@ -268,26 +271,6 @@ function TrackerService($q, $timeout) {
         query.lessThan("Date", dateToCopy);
         query.ascending("Date");
         return query.find();
-
-
-        //var deferred = $q.defer();
-
-        //var results = [
-        //    { "Action": "Tracking Service start !", "Date": { "__type": "Date", "iso": "2015-04-20T08:59:00.814Z" }, "Description": "Tracking Service start !", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-20T01:59:57.158Z", "objectId": "o4olpzVW8s", "updatedAt": "2015-04-20T01:59:57.158Z" },
-        //     { "Action": "Session Log off", "Date": { "__type": "Date", "iso": "2015-04-20T18:23:39.314Z" }, "Description": "Session Log off", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-20T11:23:40.500Z", "objectId": "voo1lc3aG4", "updatedAt": "2015-04-20T11:23:40.500Z" },
-        //     { "Action": "Tracking Service start !", "Date": { "__type": "Date", "iso": "2015-04-21T09:11:41.146Z" }, "Description": "Tracking Service start !", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-21T02:11:51.054Z", "objectId": "ANc4IMFHF2", "updatedAt": "2015-04-21T02:11:51.054Z" },
-        //     { "Action": "Session Log off", "Date": { "__type": "Date", "iso": "2015-04-21T18:07:27.740Z" }, "Description": "Session Log off", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-21T11:07:29.229Z", "objectId": "ELnytb7wz6", "updatedAt": "2015-04-21T11:07:29.229Z" },
-        //     { "Action": "Tracking Service start !", "Date": { "__type": "Date", "iso": "2015-04-22T09:18:37.461Z" }, "Description": "Tracking Service start !", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-22T02:18:48.511Z", "objectId": "3xlPJBpDSz", "updatedAt": "2015-04-22T02:18:48.511Z" },
-        //     { "Action": "Session Log off", "Date": { "__type": "Date", "iso": "2015-04-22T18:29:13.497Z" }, "Description": "Session Log off", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-22T11:29:37.023Z", "objectId": "il7DboBivT", "updatedAt": "2015-04-22T11:29:37.023Z" },
-        //     { "Action": "Tracking Service start !", "Date": { "__type": "Date", "iso": "2015-04-23T08:56:57.615Z" }, "Description": "Tracking Service start !", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-23T01:57:42.402Z", "objectId": "b08LLym66o", "updatedAt": "2015-04-23T01:57:42.402Z" },
-        //     { "Action": "Session Log off", "Date": { "__type": "Date", "iso": "2015-04-23T18:20:10.273Z" }, "Description": "Session Log off", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-23T11:20:13.046Z", "objectId": "ikGC5wuIaY", "updatedAt": "2015-04-23T11:20:13.046Z" },
-        //     { "Action": "Tracking Service start !", "Date": { "__type": "Date", "iso": "2015-04-24T08:58:27.389Z" }, "Description": "Tracking Service start !", "Name": "orientsoftware\\lndlam", "createdAt": "2015-04-24T01:58:45.797Z", "objectId": "e2ufUPaM3X", "updatedAt": "2015-04-24T01:58:45.797Z" }];
-
-        //$timeout(function () {
-        //    deferred.resolve(results);
-        //}, 1000);
-
-        //return deferred.promise;
     }
 
     this.getTrackerDetailByDate = function (date) {

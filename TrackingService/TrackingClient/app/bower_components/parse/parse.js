@@ -1430,7 +1430,7 @@
           // It wasn't in Storage, so create a new one.
           var hexOctet = function() {
             return (
-              Math.floor((1+Math.random())*0x10000).toString(16).substring(1)
+              (Math.random().toString(16) + "000000000").substr(2, 8)
             );
           };
           Parse._installationId = (
